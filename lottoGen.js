@@ -2,9 +2,7 @@ const arr = []
 
 while(true) {
     //숫자를 생성 1~45
-    const num = parseInt(Math.random() * 45) + 1 //0~1미만의 난수 0.9999 * 45 = 49.999
-
-    //slice(num, 1)
+    const num = parseInt(Math.random() * 45) + 1 //0~1미만의 난수 0.9999 * 45 = 45.999
 
     //검사
     const index = arr.indexOf(num)

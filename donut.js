@@ -19,11 +19,12 @@ const area2 = Math.pow(r2, 2)*PI
 
 let gap = area1 - area2
 
-//if 삼항연산자
+//if문
 // if(gap < 0){
 //     gap = gap * -1
 // }
 
+//삼항연산자
 gap = gap < 0 ? gap * -1 : gap
 
 gap = gap.toFixed(2)

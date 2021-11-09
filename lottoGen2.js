@@ -12,7 +12,7 @@ for (let i = 0; i < 6; i++) {
     const idx = parseInt(Math.random() * arr.length) //1.45 44 43
     arr.splice(idx, 1)
 
-    //console.log(arr)
+    console.log(arr)
 }
 
 
