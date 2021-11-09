@@ -13,7 +13,7 @@ for (let i = 0; i < 6; i++) {
     //1. arr.length === 45
     //2. arr.length === 44
     //3. arr.length === 43 ...
-    arr.splice(idx, 1)
+    arr.splice(idx, 1) // 이부분 때문에 lottoGen과는 다르게 중복이 발생하지 않는다.
 
     console.log(arr)
 }
