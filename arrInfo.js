@@ -98,6 +98,6 @@ console.log(hero) //["ionman", "batman", "pororo"]
 
 
 //splice 이용하여 변경
-var hero = ['superman', 'batman', 'pororo'];
-hero.splice(1, 2, 'ionman', 'spiderman'); //인덱스 1부터 2개 변경
-console.log(hero); //["superman", "ionman", "spiderman"]
+var hero1 = ['superman', 'batman', 'pororo'];
+hero1.splice(1, 2, 'ionman', 'spiderman'); //인덱스 1부터 2개 변경
+console.log(hero1); //["superman", "ionman", "spiderman"]
