@@ -63,3 +63,7 @@
 * whileEx1
   * while문 예제<BR/>
     - 1부터 10까지 반복으로 숫자 출력하다가 숫자 7이 나오면 종료
+
+* dowhileEx
+  * do while문 예제<BR/>
+    - MDN예제, 12345 출력하기
