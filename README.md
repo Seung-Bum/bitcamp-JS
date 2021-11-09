@@ -54,4 +54,8 @@
   [Math.ceil()->소수점 올림]
   
   * 설치필요 <BR/>
-  npm i readline-sync  
+  npm i readline-sync<BR/>
+
+* whileEx
+  * while문 예제<BR/>
+    - 1부터 100까지 홀수 출력하기
