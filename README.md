@@ -27,13 +27,8 @@
 * lottoGen2
   * lottoGen과는 다르게 중복되는 숫자를 아예 없애버림<BR/>
   arr.splice(idx, 1) -> idx를 1개지움<BR/>
-  
   첫번째 파라미터로 특정값을 추가하거나 삭제할 위치 index를 입력받습니다.<BR/>
   두번째 파라미터로 삭제할 원소의 개수를 입력받습니다.
-
-
-
-출처: https://hianna.tistory.com/489 [어제 오늘 내일]
 
 * rebarCalc
   * 1feet에 3.5dollar이고 사용자 입력값을<BR/>
