@@ -30,7 +30,8 @@
 
 * rebarCalc
   * 1feet에 3.5dollar이고 사용자 입력값을<BR/>
-  feet, 길이는 cm로 가로, 세로 입력받는다.<BR/>
+  feet, 길이는 cm로 가로, 세로 입력받을때<BR/>
+  총길이 대비 가격 구하기
   [Math.ceil()->소수점 올림]
   
   * 설치필요 <BR/>
