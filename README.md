@@ -65,7 +65,7 @@
     - 1부터 100까지 홀수 출력하기
 
 * whileEx1
-  * while문 예제<BR/>
+  * while문 예제(간단한 while(true))<BR/>
     - 1부터 10까지 반복으로 숫자 출력하다가 숫자 7이 나오면 종료
 
 * dowhileEx
