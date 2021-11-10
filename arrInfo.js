@@ -6,7 +6,7 @@ console.log(fruits)
 const fruits1 = ['사과', '바나나', '수박', '참외']
 console.log(fruits.length)
 
-// 에러발생 예문
+// 에러발생 예문 - const
 // const MY_ARRAY = [];
 // // 배열에 아이템을 삽입하는 건 가능합니다
 // MY_ARRAY.push('A'); // ["A"]
