@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "prompt-sync-history": "^1.0.1",
+    "readline-sync": "^1.4.10"
+  }
 }
