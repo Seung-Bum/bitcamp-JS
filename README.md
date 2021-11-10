@@ -29,3 +29,11 @@
 * sortEx
   * 정렬예제, 오름차순, 내림차순 [arr.sort]
 
+* pointEx
+  * 좌표찍기 연습 [Math.sqrt] [Math.pow]
+  * 최단거리 구하는 공식
+
+* pointEx1
+  * 좌표찍기 연습 / 강사님 코드
+  * sort((a,b) => { a - b } 오름차순 정렬
+

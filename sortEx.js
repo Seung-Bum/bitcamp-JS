@@ -13,3 +13,17 @@ arr.sort(function (a, b){
     return b-a
 })
 console.log(arr)
+
+
+
+arr.sort((a,b) => {
+
+    console.log(a)
+    console.log(b)
+    console.log(a - b)
+    console.log("-----------------")
+    return a -b
+
+})
+
+console.log(arr)
