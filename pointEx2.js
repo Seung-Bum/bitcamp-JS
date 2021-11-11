@@ -36,4 +36,3 @@ if(pointArr[0].kiss > pointArr[0].action) {
 }else{
     console.log("당신이본 영화"+ userMovie +"은 액션 영화입니다.")
 }
-
