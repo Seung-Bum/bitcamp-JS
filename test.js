@@ -27,7 +27,7 @@ function calc(a, b, fn){
     return result
 }
 
-console.log(calc(10, 20, (x,y) => x+y))
+console.log(calc(10, 20, (x,y) => x+y)) // 화살표 함수
 console.log('--------------------------------------------')
 console.log(calc(10, 20, (x,y) => x-y))
 
