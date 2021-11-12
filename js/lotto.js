@@ -7,7 +7,6 @@
 //get이 있다면 create도 있다.
 //내가 태그를 하나 만들게됨, 어디엔가 붙여야됨(어디에다 표현할지)
 //자바스크립트로 자료구조(dom)를 핸들링함
-
 const btn = document.getElementById("btn")
 
 btn.addEventListener("click",(event)=> {
@@ -20,12 +19,18 @@ btn.addEventListener("click",(event)=> {
     //clear all <h3> tags
     target.innerHTML =''
 
-    //메모리상에 h3 태그를 하나 만들었다.
+
+    //dom핸들링
     for (const num of balls) {
+
+        //메모리상에 h3 태그를 하나 만들었다.
         const tag = document.createElement("h3")
         const textNode = document.createTextNode(num)
+
+        //h3의 Child로 num을 출력
         tag.appendChild(textNode)
         target.appendChild(tag)
+
     }
 
 }, false)
