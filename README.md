@@ -15,7 +15,7 @@
   * "btn btn-primary" 부트스트랩에서 가져옴 버튼을 누르면 실행
   * `<script src="js/lotto.js"></script>` lotto.js 파일 불러옴
   * `<div id="resultDiv"></div>` target 설정, 어디에 로또번호를 출력할것인지
-* lotto.js
+* lotto.js:raising_hand:
   * 콜백함수 작성 -> 이벤트 실행시 지정된 함수 작동
   * dom핸들링 -> 자바스크립트로 dom(HTML 데이터)핸들링
   * 로또번호 생성하여 콜백함수 리턴값으로 설정
