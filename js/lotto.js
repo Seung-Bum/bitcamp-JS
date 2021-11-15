@@ -7,39 +7,39 @@
 //get이 있다면 create도 있다.
 //내가 태그를 하나 만들게됨, 어디엔가 붙여야됨(어디에다 표현할지)
 //자바스크립트로 자료구조(dom)를 핸들링함
-const btn = document.getElementById("btn")
-
-btn.addEventListener("click",(event)=> {
-
-    //어디에 출력 할 것인가
-    const target = document.getElementById("resultDiv")// resultDiv에 담김 <h3> 태그 지워야함
-
-    const balls = makeLottoNum()
-
-    //clear all <h3> tags
-    //내용을 삭제하거나 변경가능
-    //dom처리는 가능한 한번에 끝내면 좋다.
-    // target.innerHTML =''
-
-
-    //dom핸들링
-    let str = ''
-    for (const num of balls) {
-
-        str += `<h3>${num}</h3>`
-
-        target.innerHTML = str
-        // //메모리상에 h3 태그를 하나 만들었다.
-        // const tag = document.createElement("h3")
-        // const textNode = document.createTextNode(num)
-        //
-        // //h3의 Child로 num을 출력
-        // tag.appendChild(textNode)
-        // target.appendChild(tag)
-
-    }
-
-}, false)
+// const btn = document.getElementById("btn")
+//
+// btn.addEventListener("click",(event)=> {
+//
+//     //어디에 출력 할 것인가
+//     const target = document.getElementById("resultDiv")// resultDiv에 담김 <h3> 태그 지워야함
+//
+//     const balls = makeLottoNum()
+//
+//     //clear all <h3> tags
+//     //내용을 삭제하거나 변경가능
+//     //dom처리는 가능한 한번에 끝내면 좋다.
+//     // target.innerHTML =''
+//
+//
+//     //dom핸들링
+//     let str = ''
+//     for (const num of balls) {
+//
+//         str += `<h3>${num}</h3>`
+//
+//         target.innerHTML = str
+//         // //메모리상에 h3 태그를 하나 만들었다.
+//         // const tag = document.createElement("h3")
+//         // const textNode = document.createTextNode(num)
+//         //
+//         // //h3의 Child로 num을 출력
+//         // tag.appendChild(textNode)
+//         // target.appendChild(tag)
+//
+//     }
+//
+// }, false)
 
 
 // function makeLottoNum (){
