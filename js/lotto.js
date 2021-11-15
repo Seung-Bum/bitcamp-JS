@@ -17,39 +17,68 @@ btn.addEventListener("click",(event)=> {
     const balls = makeLottoNum()
 
     //clear all <h3> tags
-    target.innerHTML =''
+    //내용을 삭제하거나 변경가능
+    //dom처리는 가능한 한번에 끝내면 좋다.
+    // target.innerHTML =''
 
 
     //dom핸들링
+    let str = ''
     for (const num of balls) {
 
-        //메모리상에 h3 태그를 하나 만들었다.
-        const tag = document.createElement("h3")
-        const textNode = document.createTextNode(num)
+        str += `<h3>${num}</h3>`
 
-        //h3의 Child로 num을 출력
-        tag.appendChild(textNode)
-        target.appendChild(tag)
+        target.innerHTML = str
+        // //메모리상에 h3 태그를 하나 만들었다.
+        // const tag = document.createElement("h3")
+        // const textNode = document.createTextNode(num)
+        //
+        // //h3의 Child로 num을 출력
+        // tag.appendChild(textNode)
+        // target.appendChild(tag)
 
     }
 
 }, false)
 
 
-function makeLottoNum (){
-    let lotto_select = []
+// function makeLottoNum (){
+//     let lotto_select = []
+//
+//     const lottoNum = []
+//     for(let i = 1; i<= 45; i++){
+//         lottoNum.push(i)
+//     }
+//
+//     for (let i = 1; i < 7; i++){
+//         const idx = parseInt(Math.random() * lottoNum.length)+1
+//         lotto_select.push(idx)
+//         lottoNum.splice(idx,1)
+//     }
+//
+//     return lotto_select
+// }
 
-    const lottoNum = []
-    for(let i = 1; i<= 45; i++){
-        lottoNum.push(i)
+function makeLottoNum(){
+    let arr = []
+
+    for (let i = 0; i < 6; i++) {
+        const tempNum = parseInt(Math.random() * 45) + 1
+        //arr안에 tempNum이 있다면
+        if(arr.indexOf(tempNum) >= 0){
+            console.log("중복")
+            i--
+            continue
+        }
+        arr.push(tempNum)
     }
 
-    for (let i = 1; i < 7; i++){
-        const idx = parseInt(Math.random() * lottoNum.length)+1
-        lotto_select.push(idx)
-        lottoNum.splice(idx,1)
-    }
+    // arr.sort(function (a,b){
+    //     // return a - b //(양수 아니면 음수로 처리 혹은 0)
+    // })
 
-    return lotto_select
+    arr.sort((a,b) => a - b )
+
+    return arr
+
 }
-
