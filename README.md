@@ -24,6 +24,7 @@
 
 * lottos2.js:raising_hand::raising_hand:
   * 로또자판기, 기존 로또 생성기에서 입력한 돈많큼 작동하게함
+  * 기존 표준 dom처리에서 query사용으로 변경 
   
   * const btn = document.querySelector(".mybtn") -> querySelector 사용
   

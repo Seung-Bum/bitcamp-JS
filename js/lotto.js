@@ -67,6 +67,7 @@ function makeLottoNum(){
         //arr안에 tempNum이 있다면
         if(arr.indexOf(tempNum) >= 0){
             console.log("중복")
+            //숫자 -안해주면 중복될 경우 예를들어 5개만 나올 수도 있음
             i--
             continue
         }
