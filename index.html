@@ -128,7 +128,7 @@
         <section class="page-section bg-primary text-white mb-0" id="register">
             <div class="container">
                 <!-- About Section Heading-->
-                <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
+                <h2 class="page-section-heading text-center text-uppercase text-white">Movie Register</h2>
                 <!-- Icon Divider-->
                 <div class="divider-custom divider-light">
                     <div class="divider-custom-line"></div>
@@ -137,11 +137,26 @@
                 </div>
                 <!-- About Section Content-->
                 <div class="row">
-                  <h1>Movie Register</h1>
+                    <!-- Name input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="title" type="text" placeholder="Enter Title"  />
+                        <label for="name">Movie Title</label>
+                    </div>
+                    <!-- Email address input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="category" type="text" placeholder="Enter category" />
+                        <label for="email">Category</label>
+                    </div>
+                    <!-- Phone number input-->
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="poster" type="text" placeholder="Enter poster"/>
+                        <label for="phone">Movie Poster</label>
+                    </div>
+
                 </div>
                 <!-- About Section Button-->
                 <div class="text-center mt-4">
-                    <a class="btn btn-xl btn-outline-light" >
+                    <a class="btn btn-xl btn-outline-light registerBtn" >
                         <i class="fas me-2"></i>
                         Movie Register
                     </a>
@@ -560,6 +575,19 @@
                 console.log(str)
             }
 
+            document.querySelector(".registerBtn").addEventListener("click",()=> {
+
+                //input 태그의 내용들을 가져온다
+                const title = document.querySelector("#title").value
+                const category = document.querySelector("#category").value
+                const poster = document.querySelector("#poster").value
+
+                const movieObj = {title:title, category:category ,poster:poster}
+
+                console.log(movieObj)
+                addMovie(movieObj)
+
+            },false)
 
 
         </script>
