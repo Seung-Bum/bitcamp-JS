@@ -19,7 +19,7 @@ const kissCut = parseInt(kCount)
 const target = {action: actionCut, kiss: kissCut} //반지의 제왕
 
 
-//모든 함수는 똥을 싼다
+//모든 함수는 결과를 남긴다
 //화살표 함수
 movies.sort((a, b) => {
 
