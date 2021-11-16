@@ -55,7 +55,36 @@
     </div>
 </div>
 <div class="panel" id="listPanel">
+    <style>
+        table {
+            border: 1px dashed black;
+        }
+
+        table td:first-child {
+            width: 10vw;
+        }
+        table td:nth-child(2) {
+            width: 10vw;
+        }
+        table td:nth-child(3) {
+            width: 60vw;
+        }
+        table td:nth-child(4) {
+            width: 20vw;
+        }
+
+    </style>
     <h1>LIST</h1>
+    <table>
+        <thead>
+            <td>전체선택</td>
+            <td>번호</td>
+            <td>제목</td>
+            <td>날짜</td>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </div>
 <div class="panel" id="readPanel">
     <h1>READ</h1>
@@ -82,7 +111,32 @@
 
       todoService.add({title,content,dueDate,complete})
 
-      console.log(todoService.getAll())
+      showList()
+
+  }
+
+
+
+  function showList() {
+
+      const todoArr = todoService.getAll()
+
+      let str =''
+
+      for (let i = 0; i < todoArr.length ; i++) {
+          const {idx,title,dueDate,complete} = todoArr[i]
+
+          console.log(idx,title,dueDate, complete)
+
+          str += `<tr>
+                    <td><input type="checkbox" name="complete" ></td>
+                    <td>1</td>
+                    <td>AAAAA</td>
+                    <td>2021-12-22</td>
+                </tr>`
+      }
+      console.log(str)
+      document.querySelector("tbody").innerHTML = str
   }
 
 </script>
