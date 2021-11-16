@@ -109,8 +109,10 @@
 
       console.log(title, content, dueDate)
 
+      //배열에 정보 저장
       todoService.add({title,content,dueDate,complete})
 
+      //갱신된 배열 모두 화면에 출력
       showList()
 
   }
@@ -124,6 +126,8 @@
       let str =''
 
       for (let i = 0; i < todoArr.length ; i++) {
+
+          //구조 분해 할당
           const {idx,title,dueDate,complete} = todoArr[i]
 
           str += `<tr>
@@ -134,6 +138,7 @@
                 </tr>`
       }
       console.log(str)
+      //저장된 str 화면출력
       document.querySelector("tbody").innerHTML = str
   }
 
@@ -143,6 +148,7 @@
   }
 
   function deleteTodo(index) {
+      //메시지창
       confirm("deleteTodo?")
 
       todoService.removeTodo(index)
