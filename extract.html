@@ -7,7 +7,9 @@
 <body>
 
 <script>
+    //로컬 스토리지 예문
 
+    //로컬스토리지에서 데이터 가져오기
     const msg = localStorage.getItem("sample")
 
     //문자열(JSON)을 JS 객체로
@@ -15,6 +17,8 @@
 
     console.dir(obj)
 
+
+    //로컬스토리지에서 데이터 가져오기(배열)
     const arrStr = localStorage.getItem("products")
 
     const products = JSON.parse(arrStr)
