@@ -15,7 +15,7 @@
     .panel {
 
         width: 100vw;
-        height: 100vh;
+        height: 50vh;
         background-color: #31d2f2;
     }
 
@@ -77,7 +77,7 @@
     <h1>LIST</h1>
     <table>
         <thead>
-            <td>전체선택</td>
+            <td onclick="checkAll()">전체선택</td>
             <td>번호</td>
             <td>제목</td>
             <td>날짜</td>
@@ -126,18 +126,31 @@
       for (let i = 0; i < todoArr.length ; i++) {
           const {idx,title,dueDate,complete} = todoArr[i]
 
-          console.log(idx,title,dueDate, complete)
-
           str += `<tr>
-                    <td><input type="checkbox" name="complete" ></td>
-                    <td>1</td>
-                    <td>AAAAA</td>
-                    <td>2021-12-22</td>
+                    <td><input type="checkbox" name="complete" ${complete?'checked':''}></td>
+                    <td>${idx}</td>
+                    <td>${title}<button onclick="deleteTodo(${idx})">DEL</button></td>
+                    <td>${dueDate}</td>
                 </tr>`
       }
       console.log(str)
       document.querySelector("tbody").innerHTML = str
   }
+
+  function checkAll() {
+      todoService.changeAll()
+      showList()
+  }
+
+  function deleteTodo(index) {
+      confirm("deleteTodo?")
+
+      todoService.removeTodo(index)
+      showList()
+
+  }
+
+
 
 </script>
 
