@@ -46,6 +46,7 @@
 
 
 
+
 <!-- 지도 띄우기 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63d16a88212b46758759f3136d823241"></script>
 <script>
@@ -150,22 +151,29 @@
             .then(  data => {
                 //console.log(data)
                 makeList(data)
+                showMarkers(data)
             })
 
     }
 
-    //@@가게 목록 화면출력@@
+    // @@가게 목록 화면출력@@
     function makeList(arr){
         const ulEle = document.querySelector(".storeList")
         let str = ''
 
         for (let i = 0; i < arr.length ; i++) {
             console.log(arr[i])
-            str += `<a href="${arr[i].url}"><li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" >${arr[i].name}</li></a>`
+            str += `<li id="#li" data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}">${arr[i].name}</li>`
         }//end for
 
+        // for (let i = 0; i < arr.length; i++) {
+        //     str += `<div id ="img"${i}></div>`
+        // }
+
+        console.log(str)
         ulEle.innerHTML = str
     }
+
 
 
 
@@ -186,15 +194,28 @@
         const name = target.getAttribute("data-name")
         const lat = target.getAttribute("data-lat")
         const lng = target.getAttribute("data-lng")
+        const img = target.getAttribute("data-img")
 
+        console.log(img)
 
         const storeLi = [
-             {name:`${name}` , lat: `${lat}` , lng: `${lng}`}
+             {name:`${name}` , lat: `${lat}` , lng: `${lng}`, img : `${img}`}
         ]
 
 
 
         showMarkers(storeLi)
+
+        //이미지 생성하기
+        function makeImg(storeLi){
+
+
+            return document.querySelector("#li").innerHTML = storeLi.img
+
+        }//end for
+
+        makeImg(storeLi)
+
 
     },false)
 
