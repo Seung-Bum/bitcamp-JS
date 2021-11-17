@@ -82,7 +82,7 @@ http://192.168.0.230:5555/w17/3team.json
 <!-- 썸네일 CSS -->
 <style>
     .image-box {
-        width: 70px;
+        width: 180px;
         height: 60px;
         overflow: hidden;
         margin: 0 auto;
@@ -107,10 +107,14 @@ http://192.168.0.230:5555/w17/3team.json
 
         for (let i = 0; i <stores.length ; i++) {
             const store = stores[i]
+            const image = store.img
 
-            var iwContent = '<div class="image-box"><img class="image-thumbnail" src=""></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+            //console.log(image)
+
+            var iwContent = `<div class="image-box">`+`<img class="image-thumbnail" src=${image}>`+`</div>`, // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
                 iwPosition = new kakao.maps.LatLng(store.lat, store.lng), //인포윈도우 표시 위치입니다
                 iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+
 
             var infowindow = new kakao.maps.InfoWindow({
                 map: map, // 인포윈도우가 표시될 지도
@@ -122,35 +126,12 @@ http://192.168.0.230:5555/w17/3team.json
         }//end for
     }
 
+    const makedData = []
+    function makeData(data){
+        makedData.push(data)
+    }
 
-    // 목록선택창
-    document.querySelector(".menuDiv").addEventListener("click", (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-
-        //1팀 2팀 3팀 골라주기
-        const target = e.target
-
-        // a태그가 아닌걸 클릭하면 아무것도 아님
-        if(target.tagName !== 'A'){
-            return
-        }
-        console.log("A태그 클릭")
-
-        const keyword = target.getAttribute("href")
-
-        if(keyword !== '전체'){
-            const result = arr.filter(s => s.menu === keyword)
-
-            showMarkers(result)
-        }else {
-            showMarkers(arr)
-        }
-
-
-    }, false)
-
-
+    //1팀 2팀 3팀 버튼 누를때 데이터가져옴, 누르면 바로실행
     function loadData(serverInfo){
 
         //console.log("loadData: " + serverInfo )
@@ -161,9 +142,13 @@ http://192.168.0.230:5555/w17/3team.json
                 //console.log(data)
                 makeList(data)
                 showMarkers(data)//객체리터럴로 되어있음
+                makeData(data)
             })
 
     }
+
+
+
 
     // @@가게 목록 화면출력@@
     function makeList(arr){
@@ -173,8 +158,8 @@ http://192.168.0.230:5555/w17/3team.json
         console.log(arr)
         for (let i = 0; i < arr.length ; i++) {
             console.log(arr[i])
-            str += `<li id="#li" data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}">${arr[i].name}</li>`
-            str += `<div></div>`
+            str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}">${arr[i].name}</li>`
+
         }//end for
 
         ulEle.innerHTML = str
@@ -182,12 +167,15 @@ http://192.168.0.230:5555/w17/3team.json
 
 
     //@@가게목록 가게이름을 누르면 반응하는것@@
+    //일부러 ul태그에 묶어서 이벤트 걸음
     document.querySelector(".storeList").addEventListener("click", (e) => {
         e.stopPropagation()
         e.preventDefault()
 
         //li만 잡하게
         const target = e.target
+
+        //console.log(target)
 
         //li가 아닌걸 누르면 아무것도 아님
         if(target.tagName !== 'LI'){
@@ -198,15 +186,22 @@ http://192.168.0.230:5555/w17/3team.json
         const name = target.getAttribute("data-name")
         const lat = target.getAttribute("data-lat")
         const lng = target.getAttribute("data-lng")
-        const img = target.getAttribute("data-img")
 
+        function imgSelect(){
+            for (let i = 0; i < makedData.length; i++) {
+                if(name == makedData[i].name){
+                    return makedData[i].img
+                }
+            }
+        }
+        const img = imgSelect()
+        console.log(img)
 
         const storeLi = [
-             {name:`${name}` , lat: `${lat}` , lng: `${lng}`, img : `${img}`}
+            {name:`${name}` , lat: `${lat}` , lng: `${lng}`, img: img}
         ]
 
         showMarkers(storeLi)
-
     },false)
 
 </script>
