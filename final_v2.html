@@ -78,6 +78,7 @@ http://192.168.0.230:5555/w17/3team.json
 
 </script>
 
+
 <!-- 썸네일 CSS -->
 <style>
     .image-box {
@@ -94,22 +95,8 @@ http://192.168.0.230:5555/w17/3team.json
     }
 </style>
 
+
 <script>
-
-    //클릭한위치의 위도 경도 받아오는 로직직
-   // kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    //
-    //     // 클릭한 위도, 경도 정보를 가져옵니다
-    //     var latlng = mouseEvent.latLng;
-    //
-    //     var message = '클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, ';
-    //     message += '경도는 ' + latlng.getLng() + ' 입니다';
-    //
-    //     var resultDiv = document.getElementById('result');
-    //     resultDiv.innerHTML = message;
-    //
-    // });
-
     const markerArr = []
 
     function showMarkers(stores){
@@ -120,13 +107,6 @@ http://192.168.0.230:5555/w17/3team.json
 
         for (let i = 0; i <stores.length ; i++) {
             const store = stores[i]
-            // const latLng = new kakao.maps.LatLng(store.lat, store.lng);
-            // const marker = new kakao.maps.Marker({
-            //     map:map,
-            //     position: latLng,
-            //     title: store.name,
-            //     image: `<div>"${store.img}"</div>`
-
 
             var iwContent = '<div class="image-box"><img class="image-thumbnail" src=""></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
                 iwPosition = new kakao.maps.LatLng(store.lat, store.lng), //인포윈도우 표시 위치입니다
@@ -141,17 +121,6 @@ http://192.168.0.230:5555/w17/3team.json
             markerArr.push(infowindow)
         }//end for
     }
-
-
-    // const arr = [
-    //     {name:'지로우라멘' , lat:37.5536583 , lng:126.9229494  , menu:'일식'},
-    //     {name:'오복수산' ,   lat:37.5376784 , lng:127.0018967  , menu:'일식'},
-    //     {name:'스시코테이' , lat:37.5276863 , lng:127.031121 , menu:'일식'},
-    //     {name:'호별관' ,    lat:37.5095451 , lng:127.03487724  , menu:'일식'},
-    //     {name:'타지팰리스' , lat:37.54450731 , lng:126.9915116  , menu:'카레'},
-    //     {name:'죠티인도' ,   lat:37.5550446 , lng:126.9379293  , menu:'카레'},
-    //     {name:'예티 인도' , lat:37.5655634 , lng:126.9233787 , menu:'카레'}
-    // ]
 
 
     // 목록선택창
@@ -182,8 +151,6 @@ http://192.168.0.230:5555/w17/3team.json
     }, false)
 
 
-    //--------------------------------------------------------------------
-
     function loadData(serverInfo){
 
         //console.log("loadData: " + serverInfo )
@@ -210,11 +177,6 @@ http://192.168.0.230:5555/w17/3team.json
             str += `<div></div>`
         }//end for
 
-        // for (let i = 0; i < arr.length; i++) {
-        //     str += `<div id ="img"${i}></div>`
-        // }
-
-        //console.log(str)
         ulEle.innerHTML = str
     }
 
