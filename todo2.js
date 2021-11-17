@@ -21,11 +21,12 @@ function outer(){
     function getAll(){
         return arr
     }
+
     //전체선택
     //초기 complete = false로 지정 되어있음
     function changeAll(){
         for (let i = 0; i < arr.length ; i++) {
-            arr[i].complete = !arr[i].complete
+            arr[i].complete = !arr[i].complete // true면 false로, false면 true로 저장
         }
     }
 

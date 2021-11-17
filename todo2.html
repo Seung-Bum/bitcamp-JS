@@ -20,7 +20,7 @@
     }
 
     .menuDiv {
-        position: absolute;
+        position: absolute;/*위치값이 절대 값으로 지정 */
         top:0;
         z-index: 100;
     }
@@ -29,6 +29,7 @@
 </style>
 
 <div class="menuDiv">
+    <!-- 글씨 누르면 해당 칸으로 이동 -->
     <a href="#addPanel">ADD</a>
     <a href="#listPanel">LIST</a>
     <a href="#readPanel">READ</a>
@@ -93,20 +94,24 @@
 
 <script src="todo2.js"></script>
 <script>
+  //입력저장
   const todoService = outer()
 
   function saveTodo() {
 
+      //입력한 할일의 정보를 받아옴
       const titleEle = document.querySelector("input[name='title']")
       const contentEle = document.querySelector("textarea[name='content']")
       const dueDateEle = document.querySelector("input[name='dueDate']")
       console.log(titleEle,contentEle,dueDateEle)
 
+      //받아온 할일을 변수로 저장
       const title = titleEle.value
       const content = contentEle.value
       const dueDate = dueDateEle.value
-      const complete = false
+      const complete = false //체크박스 표시시 필요값
 
+      //출력하여 확인
       console.log(title, content, dueDate)
 
       //배열에 정보 저장
@@ -116,7 +121,6 @@
       showList()
 
   }
-
 
 
   function showList() {
@@ -142,6 +146,7 @@
       document.querySelector("tbody").innerHTML = str
   }
 
+  //체크박스의 모든 박스를 체크 혹은 해제
   function checkAll() {
       todoService.changeAll()
       showList()
@@ -156,10 +161,7 @@
 
   }
 
-
-
 </script>
-
 
 </body>
 </html>
