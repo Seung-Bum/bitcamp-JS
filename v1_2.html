@@ -7,6 +7,26 @@
 <body>
 
 <style>
+    body > div.container > div.row.main > div.menuDiv > h1 {
+        text-align: center;
+    }
+
+    body > div.container > div.row.main > div.orderDiv > h1 {
+        text-align: center;
+    }
+
+    body > div.container > div.row.main > div.orderDiv {
+        width: 50vw;
+    }
+
+    body > div.container > div.row.main > div.orderDiv > ul > li {
+        text-align: center;
+    }
+
+    body > div.container > div.row.main > div.orderDiv > ul > h1 {
+        text-align: center;
+    }
+
     * {
         margin: 0;
         padding: 0;
@@ -21,27 +41,29 @@
     }
 
     .header {
-        background-color: yellow;
+        background-color: #00592d;
         height: 10vh;
     }
 
     .main {
-        background-color: coral;
+        background-color: #ffffff;
         height: 80vh;
         display: flex;
 
     }
 
-
     .main .menuDiv {
-        background-color: greenyellow;
+        background-color: #ffffff;
         width: 50vw;
         overflow: auto;
-        scrollbar-width: none;
-
-
+        scrollbar-width: hide;
     }
 
+    .main .menuDiv::-webkit-scrollbar {
+        display:none;
+    }
+
+    /* flex-wrap이 있어야 순서대로 상품 잘들어감 */
     .menuList {
         display: flex;
         justify-content: center;
@@ -52,7 +74,7 @@
     .mdiv {
         width: 130px;
         height: 200px;
-        border: 1px solid skyblue;
+        border: 1px solid #00749b;
         margin: 20px;
         flex-direction: column;
         justify-content: center;
@@ -75,15 +97,18 @@
         justify-content: center;
         align-items: center;
         vertical-align: center;
+        border: 1px solid #00592d;
         transform: scale(0.5);
-
-    }
-    .pop img {
 
     }
 
     .show {
         z-index: 1000;
+    }
+
+    body > div.pop.show > img {
+        width: 600px;
+        height: 600px;
     }
 
     .hide {
@@ -117,8 +142,6 @@
             </ul>
 
         </div>
-
-        <!-- 주문내용창 -->
         <div class="orderDiv">
             <h1>ORDER</h1>
             <ul class="orderList">
