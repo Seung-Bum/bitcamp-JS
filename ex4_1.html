@@ -9,6 +9,8 @@
 
 <div id="map" style="width:100vw;height:50vh;"></div>
 
+
+<!-- localhost만 현장 ip로 변경하여 활용 -->
 <div class="panel">
     <button onclick="changeData('http://localhost:5555/bit_20211117_v2/1team.json')">1팀</button>
     <button onclick="changeData('http://localhost:5555/bit_20211117_v2/2team.json')">2팀</button>
@@ -36,8 +38,8 @@
     function changeData(url){
 
         storeService.loadData(url, (arr) => {
-            console.log("callback............")
-            console.log(arr)
+            //console.log("callback............")
+            //console.log(arr)
             makeList(arr)
             showMarkers(arr)
         })
@@ -48,7 +50,7 @@
         let str = ''
 
         for (let i = 0; i < arr.length ; i++) {
-            console.log(arr[i])
+            //console.log(arr[i])
             str += `<li data-idx="${i}">${arr[i].name}</li>`
         }//end for
 
@@ -83,7 +85,7 @@
 
         const idx = target.getAttribute("data-idx")
         const store = storeService.getDataByIndex(idx)
-        console.log(store)
+        //console.log(store)
 
         showMarkers([store])
 
