@@ -10,7 +10,7 @@ function outer(){
     function removeTodo(num){
         console.log("remove Todo...")
 
-        //특정값이 아닌것만 빼고고 나머지를 걸러줌
+        //특정값이 아닌것만 빼고 나머지를 걸러줌
        const result = arr.filter(todo => todo.idx !== num)
 
         arr = result;
