@@ -10,18 +10,18 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         crossorigin="anonymous"></script>
 
-<!-- dom이 준비가 안된상태에서도 사용함 -->
-<!--dom이 끝나면 이걸해줘 -> document 실행되면서 body 끝까지 갔다옴 ready / 안전하게 코딩하는 방법이다.-->
+<!-- dom이 준비가 안된상태에서도 사용할 수 있게 $(document).ready(function () 으로 감싸줌 -->
+<!-- dom이 끝나면 이걸해줘 -> document 실행되면서 body 끝까지 갔다옴 ready / 안전하게 코딩하는 방법이다. -->
+
 <!--스크립트 태그안에서 document를 여러번 실행하면 낭비-->
-<!--위치때문에 혹은 onload보다 빨리 쓰기 위해 사용-->
 <script>
 
-    //제이쿼리로 result를 다시 또 가져와야함 화면에 100개 200개씩 실행할때 성능 저하, 제이쿼리는 가능하면 적게
-    //지역변수로 따로 처리됨
+    // 제이쿼리로 result를 다시 또 가져와야함 화면에 100개, 200개씩 실행할때는 성능 저하, 제이쿼리는 가능하면 적게
+    // 변수로 저장해서 사용하기, 지역변수로 따로 처리됨
     $(document).ready(function (){
 
-        const result = $('#result') // 이렇게하면 window오염 x, 제이쿼리를 계속 안찾게
-        let count = 0
+        const result = $('#result') // 이렇게하면 window오염 x, 제이쿼리를 계속 안찾게 해줘야함
+        let count = 1
 
         $(".btn").on("click", (e)=> {
             //alert("click")
@@ -30,8 +30,9 @@
 
         // document 출력, this 넣으면, 화살표써서
         // remove가 제이쿼리 객체
-        $("#result").on("click", "li", function (e) {
-            $(e.target).remove()
+        result.on("click", "li", function (e) { // documnet는 , "li" 이런식으로 접근 할 수  없음
+            console.log(e.target)//AAA  ${count++}, AAA 8 숫자 그대로 찍힘
+            e.target.remove()
         })
 
     })
