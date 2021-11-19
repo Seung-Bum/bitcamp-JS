@@ -20,9 +20,9 @@
 </style>
 
 <ul>
-  <li><img src="img/k01.jpg"><span>X</span></li>
   <li><img src="img/k02.jpg"><span>X</span></li>
-  <li><img src="img/k03.jpg"><span>X</span></li>
+  <li><img src="img/k02.jpg"><span>X</span></li>
+  <li><img src="img/k02.jpg"><span>X</span></li>
 </ul>
 
 <script>
@@ -30,8 +30,9 @@
     $("ul").on("click","span", function(e){
 
       const targetEle = $(e.target).closest("li")
+      //e.target span이고 span과 가장가까운 li를 targetEle로 저장
 
-      targetEle.hide(2000, function(){
+      targetEle.hide(2000, function(){ // 2초동안 hide 동작 후 remove 동작
         targetEle.remove()
       })
     })
