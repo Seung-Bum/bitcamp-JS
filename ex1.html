@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    .red{
+        color: red;
+    }
+
+    .blue{
+        color: blue;
+    }
+</style>
+
+<div>document</div>
+<h2 class="blue">AAA</h2>
+<h2 class="blue">BBB</h2>
+<h2 class="blue">CCC</h2>
+<div>----------------------------</div>
+
+
+<div>$</div>
+<h1 class="red">DDD</h1>
+<h1 class="red">EEE</h1>
+<h1 class="red">FFF</h1>
+
+
+<!--<a href="mp3/aaa.mp3">DDD</a>-->
+<!--<a href="mp3/aaa.mp3">DDD</a>-->
+<!--<a href="mp3/aaa.mp3">DDD</a>-->
+
+<div>----------------------------</div>
+
+<!-- 제이쿼리 실행 -->
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+
+<script>
+
+    //기억할것
+    //도큐먼트랑 다름, 기능이 쌓여있다. 사용에 편의를 위해 포장, 원본을 알고싶으면 get(0) 해야함
+    //하나든 여러개든 한번에 기능 적용 가능
+
+    //둘이 다른 내용이다.
+
+    //document
+    const aaa = document.querySelector("h2")//순수한 돔처리
+    aaa.innerHTML = "h2 change" // h2의 하나만 변경됨
+
+
+    const bbb = $("h1")
+    bbb.get(0).innerHTML = "h1 change" // h1의 하나만 변경됨
+
+
+    // bbb[0].innerHTML = "CCCCCCCCCC"
+    //
+    // bbb.html("CCCCCC")
+    //
+    // console.log(bbb.html())//geter
+    //
+    // $("a")attr("href", "mp3/ccc.mp3").addClase("red")
+
+
+    //쿼리셀렉트와 쿼리세렉올의 구분이 없이 다가져옴
+    // $("h1").on("click", (e)=> {
+    //     alert("aaa")
+    // })
+
+
+
+</script>
+
+
+
+</body>
+</html>

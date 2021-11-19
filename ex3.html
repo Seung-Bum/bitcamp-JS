@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    ul{
+        display: flex;
+        list-style: none;
+        justify-content: center;
+    }
+</style>
+
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+
+
+<!--동적으로 가져오기-->
+<ul>
+    <li><img src="img/k01.jpg"><span>x</span></li>
+    <li><img src="img/k02.jpg"><span>x</span></li>
+    <li><img src="img/k03.jpg"><span>x</span></li>
+</ul>
+
+<script>
+    $(document).ready(function (e){
+        $("ul").on("click", "span", function (e){
+            targetEle = $(e.target).closest("li")//클로저로 사용됨 참조
+            targetEle.hide(2000, function (){
+                console.log(e)
+            })
+        })
+    })
+</script>
+
+
+</body>
+</html>
