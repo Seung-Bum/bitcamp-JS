@@ -31,24 +31,30 @@
 </style>
 
 <div class="container">
+
   <div class="cardImg">
-    <img src="img/j03.jpg">
+    <img src="img/k02.jpg">
     <button class="btn">MOVE</button>
   </div>
+
   <div class="cardImg">
-    <img src="img/j03.jpg">
+    <img src="img/k02.jpg">
     <button class="btn">MOVE</button>
   </div>
+
   <div class="cardImg">
-    <img src="img/j03.jpg">
+    <img src="img/k02.jpg">
     <button class="btn">MOVE</button>
   </div>
+
 </div>
+
+
 <script>
   $(document).ready(function() {
     $(".btn").on("click", function(e){
 
-      const cardImg = $(e.target).closest(".cardImg")
+      const cardImg = $(e.target).closest(".cardImg") // e.target == .btn
 
       cardImg.animate({
         left: "+=100vw",
