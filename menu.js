@@ -1,4 +1,4 @@
-//자바스크립트
+//jquery
 src="https://code.jquery.com/jquery-3.6.0.min.js"
 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 crossOrigin="anonymous"
@@ -96,7 +96,7 @@ menuList.addEventListener('click', function (e) {
 
 
 
-//팝업창 나왔을때 한번더 클릭하면 pop hide로 변경
+//모달창 나왔을때 한번더 클릭하면 pop hide로 변경
 popEle.addEventListener("click", () => {
     popEle.setAttribute("class", "pop hide")
 },false)
