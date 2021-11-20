@@ -4,8 +4,6 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 crossOrigin="anonymous"
 
 
-const popEle = document.querySelector(".modal-dialog")
-
 //1단계 메뉴배열, 주문배열 생성
 const orders = []
 
@@ -28,7 +26,7 @@ for (let i = 0; i < menus.length; i++) {
 
     // data-idx값(getAttribute으로 나중에 활용용)을 부여해서주문처리할때 사용
     str += `
-                <div class="col" data-idx="${i}">
+                <div id="modal" class="col" data-idx="${i}" data-name="${menu.name}" data-price="${menu.price}">
                     <div class="card h-100">
                         <img src=${menu.picture} class="card-img-top" alt="...">
                         <div class="menu-body" >
@@ -41,18 +39,28 @@ for (let i = 0; i < menus.length; i++) {
 menuList.innerHTML = str
 
 
-// 3단계 li에 클릭이벤트 설정, 메뉴창에서 메뉴 클릭이벤트 설정
-menuList.addEventListener("click", (e)=> {
+//모달창 실행
+//생성된 개별 메뉴 div에서 id값 받음
+const popEle = document.querySelector("#modalDiv")
+
+menuList.addEventListener('click', function (e) {
 
     //클릭한 요소값을 가져옴
     const target = e.target
 
     //li와 근접한 곳을 클릭할 경우 li 값을 가져옴
-    const liEle = target.closest(".col")
+    const liEle = target.closest("#modal")
 
-    //상품의 idx값을 idx변수에 저장
+    //상품의 저장되 있던 idx값을 idx변수에 저장
     const idx = liEle.getAttribute("data-idx")
     console.log("IDX: " + idx)
+
+    const name = liEle.getAttribute("data-name")
+    console.log("NAME: " + name)
+
+    const price = liEle.getAttribute("data-price")
+    console.log("PRICE: " + price)
+
 
     //메뉴를 클릭하면 메뉴index 값이 targetMenu로 저장됨
     const targetMenu = menus[idx]
@@ -60,11 +68,35 @@ menuList.addEventListener("click", (e)=> {
     //선택한 메뉴의 사진
     const targetPicture = targetMenu.picture
 
+
     //팝업창의 img를 targetPicture으로 변경
     popEle.querySelector("img").setAttribute("src", targetPicture)
 
-    //팝업창 h3에 idx값 저장
-    popEle.querySelector("h3").setAttribute("data-idx", idx)
+    //모달의 h5 title을 요소값 name으로 변경
+    popEle.querySelector("h5").setAttribute("data-name", name)
+    popEle.querySelector("h5").innerHTML = name
 
+    popEle.querySelector("p").setAttribute("data-price", price)
+    popEle.querySelector("p").innerHTML = `<div style="text-align: right"><h4>${price} &#8361;</h4></div>`
+
+
+    //팝업창 h3에 idx값 저장
+    popEle.querySelector("p").setAttribute("data-idx", idx)
+
+    //팝업창의 클래스를 pop show로 변경
+    popEle.setAttribute("class", "pop show")
+
+    //모달창 back show -> hide
+    // popEle.setAttribute("class", "pop show")
+
+},false)
+
+//팝업창 나왔을때 한번더 클릭하면 pop hide로 변경
+popEle.addEventListener("click", () => {
     popEle.setAttribute("class", "pop hide")
 },false)
+
+
+
+
+
