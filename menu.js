@@ -43,6 +43,9 @@ menuList.innerHTML = str
 //생성된 개별 메뉴 div에서 id값 받음
 const popEle = document.querySelector("#modalDiv")
 
+//모달 백그라운드
+const popMb = document.querySelector(".modal-back-hide")
+
 menuList.addEventListener('click', function (e) {
 
     //클릭한 요소값을 가져옴
@@ -86,14 +89,21 @@ menuList.addEventListener('click', function (e) {
     //팝업창의 클래스를 pop show로 변경
     popEle.setAttribute("class", "pop show")
 
-    //모달창 back show -> hide
-    // popEle.setAttribute("class", "pop show")
+    //모달창 back hide -> show
+    popMb.setAttribute("class", "modal-back-show")
 
 },false)
+
+
 
 //팝업창 나왔을때 한번더 클릭하면 pop hide로 변경
 popEle.addEventListener("click", () => {
     popEle.setAttribute("class", "pop hide")
+},false)
+
+//모달창 클릭시 모달창 백그라운드 -> hide로 변경
+popEle.addEventListener("click", () => {
+    popMb.setAttribute("class", "modal-back-hide")
 },false)
 
 

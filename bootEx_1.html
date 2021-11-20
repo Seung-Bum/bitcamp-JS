@@ -12,7 +12,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 
-    <title>Title</title>
+    <title>Starbucks Kiosk</title>
 </head>
 <body>
 
@@ -23,11 +23,10 @@
         justify-content: center;
         width: 100vw;
         height: 100vh;
-        /*padding-top: 30px;*/
+        padding-top: 30px;
     }
 
     .nav {
-        position: relative;
         color: #e1e1e1;
         background-color: #09100e;
         margin: 0px;
@@ -45,7 +44,7 @@
         position: absolute;
         width: 100vw;
         height: 100vh;
-        z-index: 2000;
+        z-index: 900;
         opacity: 0.7;
         background-color: #09100e;
     }
@@ -55,7 +54,7 @@
         width: 100vw;
         height: 100vh;
         z-index: -2000;
-        opacity: 0.7;
+        opacity: 0;
         background-color: #09100e;
     }
 
@@ -69,6 +68,10 @@
     }
 
 </style>
+
+<!-- modal background -->
+<div class="modal-back-hide">
+</div>
 
 <div class="nav">
     <h1>&nbsp;&nbsp;Starbucks</h1>
@@ -89,16 +92,11 @@
                     <p></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
                     <button type="button" class="btn btn-primary">Add Cart</button>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- modal background -->
-    <div class="modal-back-show">
-
     </div>
 
     <!-- 메뉴 -->
@@ -144,7 +142,6 @@
             </div>
         </div>
 
-
         <!-- 주문정보 -->
         <div class="col-md-4">
             <ol class="list-group list-group-numbered">
@@ -177,7 +174,5 @@
 </div>
 
 <script src="./menu.js"></script>
-
-
 </body>
 </html>
