@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
 
@@ -16,6 +16,22 @@
 <body>
 
 <style>
+
+    body > nav > div.nav.button > button {
+        margin-right: 30px;
+        background-color: aliceblue;
+        font-weight: bold;
+    }
+
+    body > nav > div:nth-child(1) > h1{
+        color: aliceblue;
+    }
+
+    /*주문정보 화면*/
+    .col-md-4 {
+        padding-top: 30px;
+    }
+
     .container {
         /*position: absolute;*/
         display: flex;
@@ -26,6 +42,9 @@
     }
 
     .nav {
+        /*position: absolute;*/
+        /*display: flex;*/
+        /*justify-content: center;*/
         color: #e1e1e1;
         background-color: #09100e;
         margin: 0px;
@@ -68,14 +87,34 @@
 
 </style>
 
+
 <!-- modal background -->
 <div class="modal-back-hide">
 </div>
 
 <!-- nav -->
-<div class="nav">
-    <h1>&nbsp;&nbsp;Starbucks</h1>
-</div>
+
+<nav class="navbar navbar-dark bg-dark">
+    <div>
+        <h1>&nbsp;&nbsp;Starbucks</h1>
+    </div>
+    <div class="nav button">
+        <button type="button" class="btn" style="background-color: #FFFFFF;">Pay</button>
+    </div>
+</nav>
+
+
+<!--<nav class="navbar navbar-light bg-dark">-->
+<!--    <div class="container-fluid">-->
+<!--        <a style="text-decoration-color: #e1e1e1" class="navbar-brand">Navbar</a>-->
+<!--        <form class="d-flex">-->
+<!--            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--            <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--            <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--        </form>-->
+
+<!--    </div>-->
+<!--</nav>-->
 
 <!-- menu container -->
 <div class="container">
@@ -103,7 +142,7 @@
     <!-- 메뉴 -->
     <div class="row">
         <div class="col-md-8">
-            <div id="menuList" class="row row-cols-1 row-cols-md-4 g-4">
+            <div id="menuList" class="row row-cols-2 row-cols-md-3 g-4">
 <!--                <div class="col">-->
 <!--                    <div class="card h-100">-->
 <!--                        <img src="img/c1.JPG" class="card-img-top" alt="...">-->
@@ -169,11 +208,9 @@
                 </li>
             </ol>
         </div>
-
     </div>
 
 </div>
-
 
 <script src="./menu.js"></script>
 </body>
