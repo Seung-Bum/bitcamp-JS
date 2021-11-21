@@ -174,15 +174,16 @@ function subCart(menu){
 
 // 선택된 아이템 order창에 보여주기
 function showOrderItems() {
+
     const orderListEle = document.querySelector("#orderList")
 
     //orders배열 주문목록에 있는 정보를 화면 출력
     let str = ''
-    //주문가격 총합
-    let sum = 0
 
     for (let i = 0; i < orders.length ; i++) {
         const orderItem = orders[i]
+
+        console.log(orderItem)
 
         str += `<li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
@@ -191,38 +192,53 @@ function showOrderItems() {
                     </div>
                     <div>
                         <span class="badge bg-primary rounded-pill">${orderItem.qty}</span>
-                        <button id="orderPlus" type = "button" class="btn btn-outline-dark">+</button>
-                        <button id="orderMinus" type = "button" class="btn btn-outline-dark">-</button>
-                    </div>`
+                        <button type = "button" class="btn btn-outline-dark plus">+</button>
+                        <button id="Minus" type = "button" class="btn btn-outline-dark minus">-</button>
+                    </div>
+                </li>`
 
-        //Order info add button
-        $(document).ready(function() {
-            $("#orderPlus").on("click", function(e){
+    }//end for
 
-                const orderInfo = document.querySelector("#modalDiv #addCart-Btn")
-                const orderIdx = orderInfo.getAttribute("data-idx")
-                const menu = menus[orderIdx]
-
-                addCart(menu)
-
-            })
-        })
-
-        //Order info Subtract button
-        $(document).ready(function() {
-            $("#orderMinus").on("click", function(e){
-
-                const orderInfo = document.querySelector("#modalDiv #addCart-Btn")
-                const orderIdx = orderInfo.getAttribute("data-idx")
-                const menu = menus[orderIdx]
-                subCart(menu)
-
-            })
-        })
-
-    }
     //for문으로 주문목록 출력이 끝나고 총가격의 계산이 끝나면 마지막으로 한줄 총가격 출력
     // str += `<hr/><h1>${sum}</h1>`
     orderListEle.innerHTML = str
 }
 
+
+
+//Order info add button
+$(document).ready(function() {
+    $(document).on("click",'#orderList > li > div:nth-child(2) > button.btn.btn-outline-dark.plus', function(){
+        // e.stopPropagation()
+        // e.preventDefault()
+
+        const orderInfo = document.querySelector("#modalDiv #addCart-Btn")
+        const orderIdx = orderInfo.getAttribute("data-idx")
+        const menu = menus[orderIdx]
+
+        alert($(this).text())
+
+        var idx = $('#orderList > li > div:nth-child(2) > button.btn.btn-outline-dark.plus').index(this);
+        $('#orderList > li > div:nth-child(2)').eq(idx).
+
+
+        addCart(menu)
+
+    })
+})
+
+//Order info Subtract button
+$(document).ready(function() {
+    $(document).on("click",'.btn btn-outline-dark minus', function(e){
+        e.stopPropagation()
+        e.preventDefault()
+
+
+        const orderInfo = document.querySelector("#modalDiv #addCart-Btn")
+        const orderIdx = orderInfo.getAttribute("data-idx")
+        const menu = menus[orderIdx]
+
+        subCart(menu)
+
+    })
+}, false)
