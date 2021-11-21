@@ -4,9 +4,7 @@ integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 crossOrigin="anonymous"
 
 
-//1단계 메뉴배열, 주문배열 생성
-const orders = []
-
+// 메뉴배열
 const menus = [
     {name:'Ice americano', price:3500, picture:'img/c1.jpg'},
     {name:'ice latte', price:4500, picture:'img/c2.jpg'},
@@ -18,7 +16,7 @@ const menus = [
     {name:'vanilla smoothie', price:7000, picture:'img/c8.jpg'},
 ]
 
-//2단계 메뉴 리스트 만들기
+// 메뉴 리스트 만들기
 const menuList = document.querySelector("#menuList")
 let str =''
 for (let i = 0; i < menus.length; i++) {
@@ -26,7 +24,7 @@ for (let i = 0; i < menus.length; i++) {
 
     // data-idx값(getAttribute으로 나중에 활용용)을 부여해서주문처리할때 사용
     str += `
-                <div id="modal" class="col" data-idx="${i}" data-name="${menu.name}" data-price="${menu.price}">
+                <div id="menuCard" class="col" data-idx="${i}" data-name="${menu.name}" data-price="${menu.price}">
                     <div class="card h-100">
                         <img src=${menu.picture} class="card-img-top" alt="...">
                         <div class="menu-body" >
@@ -39,30 +37,30 @@ for (let i = 0; i < menus.length; i++) {
 menuList.innerHTML = str
 
 
-//모달창 실행
-//생성된 개별 메뉴 div에서 id값 받음
+//모달창
 const popEle = document.querySelector("#modalDiv")
 
 //모달 백그라운드
 const popMb = document.querySelector(".modal-back-hide")
 
+//메뉴클릭
 menuList.addEventListener('click', function (e) {
 
     //클릭한 요소값을 가져옴
     const target = e.target
 
-    //li와 근접한 곳을 클릭할 경우 li 값을 가져옴
-    const liEle = target.closest("#modal")
+    //div의 #menuCard 가까이 클릭
+    const liEle = target.closest("#menuCard")
 
     //상품의 저장되 있던 idx값을 idx변수에 저장
     const idx = liEle.getAttribute("data-idx")
-    console.log("IDX: " + idx)
+    // console.log("IDX: " + idx)
 
     const name = liEle.getAttribute("data-name")
-    console.log("NAME: " + name)
+    // console.log("NAME: " + name)
 
     const price = liEle.getAttribute("data-price")
-    console.log("PRICE: " + price)
+    // console.log("PRICE: " + price)
 
 
     //메뉴를 클릭하면 메뉴index 값이 targetMenu로 저장됨
@@ -72,28 +70,33 @@ menuList.addEventListener('click', function (e) {
     const targetPicture = targetMenu.picture
 
 
-    //팝업창의 img를 targetPicture으로 변경
+    //모달창의 img를 targetPicture으로 변경
     popEle.querySelector("img").setAttribute("src", targetPicture)
 
     //모달의 h5 title을 요소값 name으로 변경
-    popEle.querySelector("h5").setAttribute("data-name", name)
-    popEle.querySelector("h5").innerHTML = name
+    const modalH5 = popEle.querySelector("h5")
+    modalH5.setAttribute("data-name", name)
+    modalH5.innerHTML = name
 
-    popEle.querySelector("p").setAttribute("data-price", price)
-    popEle.querySelector("p").innerHTML = `<div style="text-align: right"><h4>${price} &#8361;</h4></div>`
+    //모달 p에 price값 저장, innerHTML로 내용 변경
+    const modalP = popEle.querySelector("p")
+    modalP.setAttribute("data-price", price)
+    modalP.innerHTML = `<div style="text-align: right"><h4>${price} &#8361;</h4></div>`
+
+    //모달창 button에 idx, name, price값 저장
+    const modalAddCart = popEle.querySelector("button")
+    modalAddCart.setAttribute("data-idx", idx)
+    modalAddCart.setAttribute("data-name", name)
+    modalAddCart.setAttribute("data-price", price)
 
 
-    //팝업창 h3에 idx값 저장
-    popEle.querySelector("p").setAttribute("data-idx", idx)
-
-    //팝업창의 클래스를 pop show로 변경
+    //모달창의 클래스를 pop show로 변경
     popEle.setAttribute("class", "pop show")
 
     //모달창 back hide -> show
     popMb.setAttribute("class", "modal-back-show")
 
 },false)
-
 
 
 //모달창 나왔을때 한번더 클릭하면 pop hide로 변경
@@ -105,6 +108,92 @@ popEle.addEventListener("click", () => {
 popEle.addEventListener("click", () => {
     popMb.setAttribute("class", "modal-back-hide")
 },false)
+
+
+
+// 주문배열
+const orders = []
+
+// 모달창에서 클릭한 메뉴의 정보를 addCart에 추가 -> orders 배열로
+document.querySelector("#modalDiv #addCart-Btn").addEventListener("click", e => {
+    e.stopPropagation()
+    e.preventDefault()
+
+    //모달창 addCart에 저장된 값을 가져옴
+    const target = e.target
+
+    //번호만가지고 menus의 배열값을 가져옴
+    const menu = menus[target.getAttribute("data-idx")]
+    console.log(`ORDER MENU: ${menu.name}`)
+
+    // 선택된 메뉴를 addCart로
+    addCart(menu)
+
+}, false)
+
+
+function addCart(menu){
+    // orders 배열에 중복되는 값이 있으면 result에 저장
+    // oi는 order의 내용, 같은값이 있으면 menu의 값을 result에 저장
+    // 첫주문이라면 result는 [] 빈배열
+    // oders에 menu.name이 있다면 menu가 result가 됨
+    const result = orders.filter(oi => oi.name === menu.name)
+
+    console.log("-------check result-----------")
+    console.log(result)
+
+    //menu.qty가 1이상이라면, menu.qty에 1추가
+    if(result.length > 0){
+        //같은상품의 첫번째 값에만 qty 개수를 샘
+        result[0].qty += 1
+
+    }else {
+        // 처음 주문들어왔을때 qty 1생성
+        // ...전개 연산자, 메뉴배열에 자연스럽게 qty 더함
+        orders.push({...menu, qty: 1})
+        console.log(orders)
+    }
+
+    showOrderItems()
+}
+
+function subCart(){
+
+}
+
+
+// 선택된 아이템 order창에 보여주기
+function showOrderItems() {
+    const orderListEle = document.querySelector("#orderList")
+
+    //orders배열 주문목록에 있는 정보를 화면 출력
+    let str = ''
+    //주문가격 총합
+    let sum = 0
+
+    for (let i = 0; i < orders.length ; i++) {
+        const orderItem = orders[i]
+
+        str += `<li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">${orderItem.name}</div>
+                        ${orderItem.price * orderItem.qty}&#8361;
+                    </div>
+                    <div>
+                        <span class="badge bg-primary rounded-pill">${orderItem.qty}</span>
+                        <button id="orderMinus" type = "button" class="btn btn-outline-dark">+</button>
+                        <button id="orderPlus" type = "button" class="btn btn-outline-dark">-</button>
+                    </div>`
+
+
+        // str += `<li>${orderItem.name} ============= ${orderItem.qty} =========== ${orderItem.price * orderItem.qty} </li>`
+        // sum += orderItem.price * orderItem.qty
+    }
+    //for문으로 주문목록 출력이 끝나고 총가격의 계산이 끝나면 마지막으로 한줄 총가격 출력
+    // str += `<hr/><h1>${sum}</h1>`
+    orderListEle.innerHTML = str
+}
+
 
 
 
