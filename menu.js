@@ -1,8 +1,3 @@
-//jquery
-src="https://code.jquery.com/jquery-3.6.0.min.js"
-integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-crossOrigin="anonymous"
-
 
 // 메뉴배열
 const menus = [
@@ -129,12 +124,16 @@ document.querySelector("#modalDiv #addCart-Btn").addEventListener("click", e => 
     // 선택된 메뉴를 addCart로
     addCart(menu)
 
+    // 모달창 종료료
+   popEle.setAttribute("class", "pop hide")
+    popMb.setAttribute("class", "modal-back-hide")
+
 }, false)
 
 
 function addCart(menu){
     // orders 배열에 중복되는 값이 있으면 result에 저장
-    // oi는 order의 내용, 같은값이 있으면 menu의 값을 result에 저장
+    // oi는 order의 내용, menu에 같은값이 있으면 menu의 값을 result에 저장
     // 첫주문이라면 result는 [] 빈배열
     // oders에 menu.name이 있다면 menu가 result가 됨
     const result = orders.filter(oi => oi.name === menu.name)
@@ -142,9 +141,10 @@ function addCart(menu){
     console.log("-------check result-----------")
     console.log(result)
 
-    //menu.qty가 1이상이라면, menu.qty에 1추가
+    //result.length가 0보다 크다면 -> 주문목록에 상품이 있다면
+    //카트에 상품이 늘어나면 result.lenght가 늘어남
     if(result.length > 0){
-        //같은상품의 첫번째 값에만 qty 개수를 샘
+        //result 변수는 지정된 목록 하나임 필터로 거러짐
         result[0].qty += 1
 
     }else {
@@ -153,12 +153,22 @@ function addCart(menu){
         orders.push({...menu, qty: 1})
         console.log(orders)
     }
-
     showOrderItems()
 }
 
-function subCart(){
+function subCart(menu){
 
+    const result = orders.filter(oi => oi.name === menu.name)
+
+    console.log("-------check result-----------")
+    console.log(result)
+
+    if(result[0].qty > 0){
+        result[0].qty -= 1
+    }else{
+        console.log('dont push this button')
+    }
+    showOrderItems()
 }
 
 
@@ -181,21 +191,38 @@ function showOrderItems() {
                     </div>
                     <div>
                         <span class="badge bg-primary rounded-pill">${orderItem.qty}</span>
-                        <button id="orderMinus" type = "button" class="btn btn-outline-dark">+</button>
-                        <button id="orderPlus" type = "button" class="btn btn-outline-dark">-</button>
+                        <button id="orderPlus" type = "button" class="btn btn-outline-dark">+</button>
+                        <button id="orderMinus" type = "button" class="btn btn-outline-dark">-</button>
                     </div>`
 
+        //Order info add button
+        $(document).ready(function() {
+            $("#orderPlus").on("click", function(e){
 
-        // str += `<li>${orderItem.name} ============= ${orderItem.qty} =========== ${orderItem.price * orderItem.qty} </li>`
-        // sum += orderItem.price * orderItem.qty
+                const orderInfo = document.querySelector("#modalDiv #addCart-Btn")
+                const orderIdx = orderInfo.getAttribute("data-idx")
+                const menu = menus[orderIdx]
+
+                addCart(menu)
+
+            })
+        })
+
+        //Order info Subtract button
+        $(document).ready(function() {
+            $("#orderMinus").on("click", function(e){
+
+                const orderInfo = document.querySelector("#modalDiv #addCart-Btn")
+                const orderIdx = orderInfo.getAttribute("data-idx")
+                const menu = menus[orderIdx]
+                subCart(menu)
+
+            })
+        })
+
     }
     //for문으로 주문목록 출력이 끝나고 총가격의 계산이 끝나면 마지막으로 한줄 총가격 출력
     // str += `<hr/><h1>${sum}</h1>`
     orderListEle.innerHTML = str
 }
-
-
-
-
-
 
