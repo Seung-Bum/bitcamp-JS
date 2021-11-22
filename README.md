@@ -4,6 +4,6 @@
 
 * bootEX_1.thml
 * menu.js
--> 두개의 파일로 음료주문 키오스크 제작을함
-![coffee](./coffee.png)
+-> 두개의 파일로 음료주문 키오스크 제작을함</br>
+![coffee](./img/coffee.png)
 
