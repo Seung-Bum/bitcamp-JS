@@ -80,9 +80,9 @@ menuList.addEventListener('click', function (e) {
 
     //모달창 button에 idx, name, price값 저장
     const modalAddCart = popEle.querySelector("button")
-    modalAddCart.setAttribute("data-idx", idx)
-    modalAddCart.setAttribute("data-name", name)
-    modalAddCart.setAttribute("data-price", price)
+    addCartBtn.push(modalAddCart.setAttribute("data-idx", idx))
+    addCartBtn.push(modalAddCart.setAttribute("data-name", name))
+    addCartBtn.push(modalAddCart.setAttribute("data-price", price))
 
 
     //모달창의 클래스를 pop show로 변경
@@ -106,6 +106,11 @@ popEle.addEventListener("click", () => {
 
 
 
+//addCart 버튼에 담겨있는 data-
+let addCartBtn =[]
+
+
+
 // 주문배열
 const orders = []
 
@@ -125,13 +130,18 @@ document.querySelector("#modalDiv #addCart-Btn").addEventListener("click", e => 
     addCart(menu)
 
     // 모달창 종료료
-   popEle.setAttribute("class", "pop hide")
+    popEle.setAttribute("class", "pop hide")
     popMb.setAttribute("class", "modal-back-hide")
+
+    // console.log(`${addCartBtn.getAttribute("data-name")} 정보가 잘담김`)
+    // console.log(`${addCartBtn.getAttribute("data-idx")} 정보가 잘담김`)
+    // console.log(`${addCartBtn.getAttribute("data-price")} 정보가 잘담김`)
 
 }, false)
 
 
 function addCart(menu){
+
     // orders 배열에 중복되는 값이 있으면 result에 저장
     // oi는 order의 내용, menu에 같은값이 있으면 menu의 값을 result에 저장
     // 첫주문이라면 result는 [] 빈배열
@@ -155,6 +165,7 @@ function addCart(menu){
     }
     showOrderItems()
 }
+
 
 function subCart(menu){
 
@@ -180,15 +191,17 @@ function showOrderItems() {
     //orders배열 주문목록에 있는 정보를 화면 출력
     let str = ''
 
+
     for (let i = 0; i < orders.length ; i++) {
         const orderItem = orders[i]
 
-        console.log(orderItem)
+        // console.log(orderItem)
+        sum = orderItem.price * orderItem.qty
 
         str += `<li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">${orderItem.name}</div>
-                        ${orderItem.price * orderItem.qty}&#8361;
+                        <h6>${sum}&#8361;</h6>
                     </div>
                     <div>
                         <span class="badge bg-primary rounded-pill">${orderItem.qty}</span>
@@ -208,37 +221,41 @@ function showOrderItems() {
 
 //Order info add button
 $(document).ready(function() {
-    $(document).on("click",'#orderList > li > div:nth-child(2) > button.btn.btn-outline-dark.plus', function(){
-        // e.stopPropagation()
+    $(document).on("click",'#orderList > li > div:nth-child(2) > button.btn.btn-outline-dark.plus', function(e){
+        e.stopPropagation()
         // e.preventDefault()
 
         const orderInfo = document.querySelector("#modalDiv #addCart-Btn")
         const orderIdx = orderInfo.getAttribute("data-idx")
+
+
+        const plus_idx = document.querySelector('#orderList > li > div:nth-child(2) > button.btn.btn-outline-dark.plus')
+        plus_idx.setAttribute("data-idx", orderIdx)
+
+
+        console.log(menus[orderIdx].name)
+        console.log("BUTTON: "+`${plus_idx.getAttribute("data-idx")}`)
+
+
         const menu = menus[orderIdx]
-
-        alert($(this).text())
-
-        var idx = $('#orderList > li > div:nth-child(2) > button.btn.btn-outline-dark.plus').index(this);
-        $('#orderList > li > div:nth-child(2)').eq(idx).
-
-
         addCart(menu)
+
+        // var idx = $('#orderList > li > div:nth-child(2) > button.btn.btn-outline-dark.plus').index(this);
+        // $('#orderList > li > div.ms-2.me-auto').eq(idx).append(`${plus_idx}`)
 
     })
 })
 
-//Order info Subtract button
+// Order info Subtract button
 $(document).ready(function() {
-    $(document).on("click",'.btn btn-outline-dark minus', function(e){
+    $(document).on("click",'#Minus', function(e){
         e.stopPropagation()
         e.preventDefault()
-
 
         const orderInfo = document.querySelector("#modalDiv #addCart-Btn")
         const orderIdx = orderInfo.getAttribute("data-idx")
         const menu = menus[orderIdx]
 
         subCart(menu)
-
     })
 }, false)
