@@ -12,54 +12,106 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=63d16a88212b46758759f3136d823241"></script>
+<script src="map.js"></script>
 
 <style>
-    .btn {
-        margin: 5px;
+    .card {
+        margin-top: 10px;
     }
+    #k {
+        margin: 6px;
+    }
+    #j {
+        margin: 6px;
+    }
+    #f {
+        margin: 6px;
+    }
+
 </style>
 
 <body>
-<div class="container">
+<div class="container-fluid">
     <div class="row no-gutters">
         <div class="col-md-10 mycol">
-            <div id="map" style="width:55vw;height:100vh;"></div>
+            <!-- 지도를 표시할 div 입니다 -->
+            <div id="map" style="width:82vw;height:100vh;"></div>
             <div id="result"></div>
         </div>
         <div class="col-md-2 mycol">
-            <button type="button" class="btn btn-primary">한식</button>
-            <button type="button" class="btn btn-primary">중식</button>
-            <button type="button" class="btn btn-primary">일식</button>
-        </div>
 
+            <div class="card" style="width: 18rem;">
+                <button value="0" id ="k" type="button" class="btn btn-primary">Korean</button>
+                <button value="1" id ="j" type="button" class="btn btn-primary">Japanese</button>
+                <button value="2" id ="f" type="button" class="btn btn-primary">fastfood</button>
+
+                <div class="card-body">
+                    <h5 class="card-title">restaurant map</h5>
+                    <p class="card-text">What kind of food do you like?</p>
+                    <ul></ul>
+<!--                    <a href="#" class="btn btn-primary">Go somewhere</a>-->
+                </div>
+            </div>
+
+<!--            <div class="card" style="width: 18rem;">-->
+<!--                <button value="0" id ="k" type="button" class="btn btn-primary">Korean</button>-->
+
+<!--                <div class="card-body">-->
+<!--                    <h5 class="card-title">Please choose a store</h5>-->
+<!--                    <p class="card-text">What kind of food do you like?</p>-->
+<!--                    <ul></ul>-->
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- 지도를 표시할 div 입니다 -->
-
-
-
-
-
-
-
-
-
-
-<!--<div class="menuDiv">-->
-<!--    <a href="한식">한식</a>-->
-<!--    <a href="일식">일식</a>-->
-<!--    <a href="페스트푸드">페스트푸드</a>-->
-<!--</div>-->
-
-
-
-
-
-
-
-
 <script>
+
+    $(document).ready(function(){
+
+        // 표시할 마커를 저장하는 배열
+        const markerArr = []
+
+        function makeStores(arr){
+            // console.log(arr)
+
+            let str = ''
+
+            for (let i = 0; i < markerArr.length; i++) {
+                markerArr[i].setMap(null)
+            }
+
+            for (let i = 0; i < arr.length ; i++) {
+                const {sno,sname,menu,lat,lng} = arr[i]
+
+                const latLng = new kakao.maps.LatLng(lat, lng);
+                const marker = new kakao.maps.Marker({
+                    map:map,
+                    position: latLng,
+                    title: sname
+                })
+                markerArr.push(marker)
+
+                str += `<li id="snameId">${sname}<ul>${menu}</ul></li>`
+
+            }
+            $("body > div > div > div.col-md-2.mycol > div > div > ul").html(str)
+        }
+
+
+        $("#k, #f, #j").on("click",function(e){
+            const idx = e.target.value
+            console.log(idx)
+
+            if(idx < 0){
+                return
+            }
+            $("body > div > div > div.col-md-2.mycol > div > div > ul").html('')
+            storeService.loadJson(idx, makeStores)
+        })
+
+    })
 
     // 지도를 표시하는 코드
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -70,113 +122,6 @@
 
     // 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
     var map = new kakao.maps.Map(mapContainer, mapOption);
-
-    // 표시할 마커를 저장하는 배열
-    const markerArr = []
-
-    // 마커를 보여주는 코드
-    function showMarkers(stores){
-
-        // 기존 마커들은 지워야 한다.
-        for (let i = 0; i < markerArr.length; i++) {
-            markerArr[i].setMap(null)
-        }
-
-        for (let i = 0; i <stores.length ; i++) {
-            const store = stores[i]
-            const latLng = new kakao.maps.LatLng(store.lat, store.lng);
-            const marker = new kakao.maps.Marker({
-                map:map,
-                position: latLng,
-                title: store.name
-            })
-            markerArr.push(marker)
-        }//end for
-    }
-
-
-
-    // 맛집 데이터
-    const arr = [
-        {name:'지로우라멘' , lat:37.5536583 , lng:126.9229494  , menu:'일식'},
-        {name:'오복수산' ,   lat:37.5376784 , lng:127.0018967  , menu:'일식'},
-        {name:'스시코테이' , lat:37.5276863 , lng:127.031121 , menu:'일식'},
-        {name:'호별관' ,    lat:37.5095451 , lng:127.03487724  , menu:'일식'},
-        {name:'타지팰리스' , lat:37.54450731 , lng:126.9915116  , menu:'카레'},
-        {name:'죠티인도' ,   lat:37.5550446 , lng:126.9379293  , menu:'카레'},
-        {name:'예티 인도' , lat:37.5655634 , lng:126.9233787 , menu:'카레'}
-    ]
-
-
-    document.querySelector(".menuDiv").addEventListener("click", (e) => {
-        e.preventDefault()
-        e.stopPropagation()
-
-        const target = e.target
-
-        if(target.tagName !== 'A'){
-            return
-        }
-        console.log("A태그 클릭")
-        const keyword = target.getAttribute("href")
-
-        if(keyword !== '전체'){
-            const result = arr.filter(s => s.menu === keyword)
-
-            showMarkers(result)
-        }else {
-            showMarkers(arr)
-        }
-
-
-    }, false)
-
-</script>
-
-<script>
-
-    function loadData(serverInfo){
-
-        console.log("loadData: " + serverInfo )
-
-        fetch(serverInfo)
-            .then(  response => response.json())
-            .then(  data => {
-                //console.log(data)
-                makeList(data)
-            })
-
-    }
-
-    function makeList(arr){
-        const ulEle = document.querySelector(".storeList")
-        let str = ''
-
-        for (let i = 0; i < arr.length ; i++) {
-            console.log(arr[i])
-            str += `<li data-name="${arr[i].name}" data-lat="${arr[i].lat}" data-lng="${arr[i].lng}" >${arr[i].name}</li>`
-        }//end for
-
-        ulEle.innerHTML = str
-    }
-
-    document.querySelector(".storeList").addEventListener("click", (e) => {
-        e.stopPropagation()
-        e.preventDefault()
-        const target = e.target
-
-        if(target.tagName !== 'LI'){
-            return
-        }
-
-        console.log(target)
-        const name = target.getAttribute("data-name")
-        const lat = target.getAttribute("data-lat")
-        const lng = target.getAttribute("data-lng")
-
-        console.log(name, lat, lng)
-
-    },false)
 
 </script>
 
