@@ -7,3 +7,4 @@
 * menu.js</br>
 -> 두개의 파일로 음료주문 키오스크 제작함</br>
 
+![alt text](http://url/to/img.png)
