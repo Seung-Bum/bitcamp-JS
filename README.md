@@ -9,4 +9,4 @@
 
 
 
-![main](./img/coffe.png)
+![main page](./img/coffee.png)
