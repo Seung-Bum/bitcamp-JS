@@ -7,6 +7,4 @@
 * menu.js</br>
 -> 두개의 파일로 음료주문 키오스크 제작함</br>
 
-
-
-![main page](./img/Cafe.png)
+![Cafe](https://user-images.githubusercontent.com/53399043/143214338-6100a7a7-4b89-4499-9799-94a0a765c388.PNG)
