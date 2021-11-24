@@ -51,12 +51,6 @@ menuList.addEventListener('click', function (e) {
     const idx = liEle.getAttribute("data-idx")
     // console.log("IDX: " + idx)
 
-    const name = liEle.getAttribute("data-name")
-    // console.log("NAME: " + name)
-
-    const price = liEle.getAttribute("data-price")
-    // console.log("PRICE: " + price)
-
 
     //메뉴를 클릭하면 메뉴index 값이 targetMenu로 저장됨
     const targetMenu = menus[idx]
@@ -70,20 +64,16 @@ menuList.addEventListener('click', function (e) {
 
     //모달의 h5 title을 요소값 name으로 변경
     const modalH5 = popEle.querySelector("h5")
-    modalH5.setAttribute("data-name", name)
-    modalH5.innerHTML = name
+    modalH5.innerHTML = menus[idx].name
 
     //모달 p에 price값 저장, innerHTML로 내용 변경
     const modalP = popEle.querySelector("p")
-    modalP.setAttribute("data-price", price)
-    modalP.innerHTML = `<div style="text-align: right"><h4>${price} &#8361;</h4></div>`
+    modalP.innerHTML = `<div style="text-align: right"><h4>${menus[idx].price} &#8361;</h4></div>`
 
     //모달창 button에 idx, name, price값 저장
     const modalAddCart = popEle.querySelector("button")
-    addCartBtn.push(modalAddCart.setAttribute("data-idx", idx))
-    addCartBtn.push(modalAddCart.setAttribute("data-name", name))
-    addCartBtn.push(modalAddCart.setAttribute("data-price", price))
-
+    modalAddCart.setAttribute("data-idx", idx)
+    console.log(modalAddCart.setAttribute("data-idx", idx)+" Modal IDX SAVE")
 
     //모달창의 클래스를 pop show로 변경
     popEle.setAttribute("class", "pop show")
@@ -91,8 +81,14 @@ menuList.addEventListener('click', function (e) {
     //모달창 back hide -> show
     popMb.setAttribute("class", "modal-back-show")
 
-},false)
 
+    //주문목록창에 idx set
+    // const order = document.querySelector("#count")
+    // order.setAttribute("data-idx", idx)
+    // console.log(idx + 'check')
+
+
+},false)
 
 //모달창 나왔을때 한번더 클릭하면 pop hide로 변경
 popEle.addEventListener("click", () => {
@@ -103,11 +99,6 @@ popEle.addEventListener("click", () => {
 popEle.addEventListener("click", () => {
     popMb.setAttribute("class", "modal-back-hide")
 },false)
-
-
-
-//addCart 버튼에 담겨있는 data-
-let addCartBtn =[]
 
 
 
@@ -122,6 +113,7 @@ document.querySelector("#modalDiv #addCart-Btn").addEventListener("click", e => 
     //모달창 addCart에 저장된 값을 가져옴
     const target = e.target
 
+
     //번호만가지고 menus의 배열값을 가져옴
     const menu = menus[target.getAttribute("data-idx")]
     console.log(`ORDER MENU: ${menu.name}`)
@@ -132,10 +124,6 @@ document.querySelector("#modalDiv #addCart-Btn").addEventListener("click", e => 
     // 모달창 종료료
     popEle.setAttribute("class", "pop hide")
     popMb.setAttribute("class", "modal-back-hide")
-
-    // console.log(`${addCartBtn.getAttribute("data-name")} 정보가 잘담김`)
-    // console.log(`${addCartBtn.getAttribute("data-idx")} 정보가 잘담김`)
-    // console.log(`${addCartBtn.getAttribute("data-price")} 정보가 잘담김`)
 
 }, false)
 
@@ -183,14 +171,15 @@ function subCart(menu){
 }
 
 
+
+
 // 선택된 아이템 order창에 보여주기
 function showOrderItems() {
 
-    const orderListEle = document.querySelector("#orderList")
+    const orderListEle = document.querySelector("#order")
 
     //orders배열 주문목록에 있는 정보를 화면 출력
     let str = ''
-
 
     for (let i = 0; i < orders.length ; i++) {
         const orderItem = orders[i]
@@ -198,15 +187,15 @@ function showOrderItems() {
         // console.log(orderItem)
         sum = orderItem.price * orderItem.qty
 
-        str += `<li class="list-group-item d-flex justify-content-between align-items-start">
+        str += `<li id="orderLi" class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
-                        <div class="fw-bold">${orderItem.name}</div>
+                        <div id ="orderName"class="fw-bold">${orderItem.name}</div>
                         <h6>${sum}&#8361;</h6>
                     </div>
-                    <div>
+                    <div id="count">
                         <span class="badge bg-primary rounded-pill">${orderItem.qty}</span>
-                        <button type = "button" class="btn btn-outline-dark plus">+</button>
-                        <button id="Minus" type = "button" class="btn btn-outline-dark minus">-</button>
+                        <button id="plus"type = "button" class="btn btn-outline-dark plus">+</button>
+                        <button id="minus" type = "button" class="btn btn-outline-dark minus">-</button>
                     </div>
                 </li>`
 
@@ -219,36 +208,46 @@ function showOrderItems() {
 
 
 
+nameArr = []
+function orderFilter(name, orders){
+    console.log(name.indexOf(orders.name))
+    // const result = orders.filter(oi => oi.name === name)
+    // return result[0]
+}
+
+
 //Order info add button
 $(document).ready(function() {
-    $(document).on("click",'#orderList > li > div:nth-child(2) > button.btn.btn-outline-dark.plus', function(e){
+    $(document).on("click",'#plus', function(e){
         e.stopPropagation()
-        // e.preventDefault()
+        e.preventDefault()
 
-        const orderInfo = document.querySelector("#modalDiv #addCart-Btn")
-        const orderIdx = orderInfo.getAttribute("data-idx")
+        // const target = e.target
+        // const orderName = target.closest("li")
+        // const name = orderName.querySelector('.fw-bold')
+
+        const innerText = document.getElementById('orderName').innerText
+        console.log(innerText)
+
+        //필터링 하면됨
+        const result = orders.filter(oi => oi.name === name)
 
 
-        const plus_idx = document.querySelector('#orderList > li > div:nth-child(2) > button.btn.btn-outline-dark.plus')
-        plus_idx.setAttribute("data-idx", orderIdx)
+        //클릭해서 얻은 네임값하고 주문배열에 있는 네임갑하고 같은거를 if로 거르기
+
+        // console.log(menus[idx].name)
+        // console.log("BUTTON: "+`${idx}`)
 
 
-        console.log(menus[orderIdx].name)
-        console.log("BUTTON: "+`${plus_idx.getAttribute("data-idx")}`)
-
-
-        const menu = menus[orderIdx]
+        const menu = name
         addCart(menu)
-
-        // var idx = $('#orderList > li > div:nth-child(2) > button.btn.btn-outline-dark.plus').index(this);
-        // $('#orderList > li > div.ms-2.me-auto').eq(idx).append(`${plus_idx}`)
 
     })
 })
 
 // Order info Subtract button
 $(document).ready(function() {
-    $(document).on("click",'#Minus', function(e){
+    $(document).on("click",'#minus', function(e){
         e.stopPropagation()
         e.preventDefault()
 
