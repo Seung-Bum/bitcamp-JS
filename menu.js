@@ -172,7 +172,6 @@ function subCart(menu){
 
 
 
-
 // 선택된 아이템 order창에 보여주기
 function showOrderItems() {
 
@@ -217,33 +216,21 @@ function orderFilter(name, orders){
 
 
 //Order info add button
+const orderListEle = document.querySelector("#order")
 $(document).ready(function() {
     $(document).on("click",'#plus', function(e){
         e.stopPropagation()
         e.preventDefault()
 
-        // const target = e.target
-        // const orderName = target.closest("li")
-        // const name = orderName.querySelector('.fw-bold')
+        const orderInfo = document.querySelector("#modalDiv #addCart-Btn")
+        const orderIdx = orderInfo.getAttribute("data-idx")
+        const menu = menus[orderIdx]
 
-        const innerText = document.getElementById('orderName').innerText
-        console.log(innerText)
-
-        //필터링 하면됨
-        const result = orders.filter(oi => oi.name === name)
-
-
-        //클릭해서 얻은 네임값하고 주문배열에 있는 네임갑하고 같은거를 if로 거르기
-
-        // console.log(menus[idx].name)
-        // console.log("BUTTON: "+`${idx}`)
-
-
-        const menu = name
         addCart(menu)
 
     })
 })
+
 
 // Order info Subtract button
 $(document).ready(function() {
