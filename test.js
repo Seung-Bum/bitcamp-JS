@@ -17,3 +17,4 @@ function lotto (){
 
 
 console.log(lotto())
+
