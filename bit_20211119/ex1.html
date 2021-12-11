@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    .red{
+        color: red;
+    }
+
+    .blue{
+        color: blue;
+    }
+</style>
+
+<div>document</div>
+<h2 class="blue">AAA</h2>
+<h2 class="blue">BBB</h2>
+<h2 class="blue">CCC</h2>
+<div>----------------------------</div>
+
+
+<div>Query</div>
+<h1 class="red">DDD</h1>
+<h1 class="red">EEE</h1>
+<h1 class="red">FFF</h1>
+
+
+<div>----------------------------</div>
+
+<a href="mp3/aaa.mp3">mp1</a>
+<a href="mp3/aaa.mp3">mp2</a>
+<a href="mp3/aaa.mp3">mp3</a>
+
+
+<!-- 제이쿼리 실행 -->
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+
+<script>
+
+    //기억할것
+    //도큐먼트랑 다름, 기능이 쌓여있다. 사용에 편의를 위해 포장, 원본을 알고싶으면 get(0) 해야함
+    //하나든 여러개든 한번에 기능 적용 가능
+
+    //document와 query의 변수 저장은 둘이 다른 내용이다.
+
+    //document
+    const aaa = document.querySelector("h2")//순수한 돔처리
+    aaa.innerHTML = "h2 change" // h2의 하나만 변경됨
+
+    //document.queryselectorall 전부 변경시 필요
+
+
+    //query
+    //innerHTML에 접근하는 방법
+    //쿼리문을 여러번 쓰지말고 변수로 선언해 불러오는게 좋다.
+    const bbb = $("h1")
+    console.log(bbb.innerHTML) //undifined가 나온다
+
+    bbb.get(0).innerHTML = "h1 change" // h1의 DDD 변경
+    bbb.get(1).innerHTML = "h1 change" // h1의 EEE 변경
+    bbb.get(2).innerHTML = "h1 change" // h1의 FFF 변경
+
+    //배열형식으로 접근
+    bbb[0].innerHTML = "h1 change change"
+
+    //전체변경
+    bbb.html("h1 All change")
+
+    console.log(bbb.html()) //h1 All change
+
+    $("a").attr("href", "mp3/aaa.mp3").addClass("red").hide('slow') //jquery에서 제공하는 기능
+
+
+    //모든 h1에 클릭이벤트 설정
+    $("h1").on("click", (e)=> {
+        alert("aaa")
+    })
+
+</script>
+</body>
+</html>
